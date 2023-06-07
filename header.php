@@ -44,8 +44,8 @@
         if( options::logic( 'blog_post' , 'post_sharing' ) || options::logic( 'blog_post' , 'page_sharing' ) || options::logic( 'general' , 'fb_comments' ) ){ 
             /*BOF if sharing or FB comments are enebled*/
             global $post;
-            if ( !in_array( 'wordpress-seo/wp-seo.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) { 
-                get_site_meta($post);
+            if ( ! in_array( 'wordpress-seo/wp-seo.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) { 
+                echo cosmo_get_site_meta();
             }
 
             if( is_single() || is_page() ){ 
@@ -111,7 +111,7 @@
     <link rel="profile" href="http://gmpg.org/xfn/11" />
     
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
-    <link href='http://fonts.googleapis.com/css?family=Gruppo' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Gruppo' rel='stylesheet' type='text/css'>
 	
     <!--[if lt IE 9]>
         <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/autoinclude/ie.css">
@@ -282,7 +282,7 @@ endhtml;
         if( options::logic( 'blog_post' , 'post_sharing' ) || options::logic( 'blog_post' , 'page_sharing' ) || options::logic( 'general' , 'fb_comments' ) || is_element_used($current_template -> _header_rows, 'login') ){
             /*BOF if sharing or FB comments are enebled, OR login element is used in the header*/
     ?>       
-    <script src="http://connect.facebook.net/en_US/all.js#xfbml=1" type="text/javascript" id="fb_script"></script>
+    <script src="//connect.facebook.net/en_US/all.js#xfbml=1" type="text/javascript" id="fb_script"></script>
     <?php 
         } /*EOF if sharing or FB comments are enebled*/
     ?>
@@ -343,10 +343,11 @@ endhtml;
                 </div>
             <?php    
             }
+            $sticky_header_option = options::logic ( 'styling' , 'show_sticky_header' );
         ?>
         
         <header id="top">
-            <div id="header-container">
+            <div id="header-container" <?php if ( $sticky_header_option ) echo 'class="sticky-header"'; ?> >
                 <?php
                     /*the following commented code was moved upper because we need this initialized
                      yearlyer to get the template header BG color and template heater text color*/
@@ -355,4 +356,5 @@ endhtml;
                 ?>
 
             </div>
+            <div class="sticky-header-delimiter hidden"></div>
         </header>
